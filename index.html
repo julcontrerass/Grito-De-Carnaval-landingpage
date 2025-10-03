@@ -3,27 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grito de Carnaval 2026</title>
+    <meta name="description" content="Celebra el Grito de Carnaval 2026 el 4 de enero en La Justina, Derqui, Pilar. Gastronomía internacional, torneos, música en vivo y diversión para toda la familia.">
+    <meta name="keywords" content="carnaval, venezuela, argentina, evento, fiesta, gastronomía, torneos, música en vivo, pilar, derqui">
+    <meta name="theme-color" content="#6b7c5a">
+    <title>Grito de Carnaval 2026 | La Justina - Derqui, Pilar</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
         <div class="navbar-content">
             <div class="navbar-brand">Grito de Carnaval 2026</div>
-            <button class="navbar-toggle" onclick="toggleMenu()">
+            <button
+                class="navbar-toggle"
+                onclick="toggleMenu()"
+                aria-label="Abrir menú de navegación"
+                aria-expanded="false"
+                aria-controls="navbarMenu">
                 <span></span>
                 <span></span>
             </button>
-            <ul class="navbar-menu" id="navbarMenu">
-                <li><a href="#inicio" onclick="closeMenu()">Inicio</a></li>
-                <li><a href="#evento" onclick="closeMenu()">El Evento</a></li>
-                <li><a href="#paquetes" onclick="closeMenu()">Paquetes</a></li>
-                <li><a href="#torneos" onclick="closeMenu()">Torneos</a></li>
-                <li><a href="#stands" onclick="closeMenu()">Stands</a></li>
-                <li><a href="#sponsors" onclick="closeMenu()">Sponsors</a></li>
-                <li><a href="#ubicacion" onclick="closeMenu()">Ubicación</a></li>
-                <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
+            <ul class="navbar-menu" id="navbarMenu" role="menubar">
+                <li role="none"><a href="#inicio" onclick="closeMenu()" role="menuitem">Inicio</a></li>
+                <li role="none"><a href="#evento" onclick="closeMenu()" role="menuitem">El Evento</a></li>
+                <li role="none"><a href="#paquetes" onclick="closeMenu()" role="menuitem">Paquetes</a></li>
+                <li role="none"><a href="#torneos" onclick="closeMenu()" role="menuitem">Torneos</a></li>
+                <li role="none"><a href="#stands" onclick="closeMenu()" role="menuitem">Stands</a></li>
+                <li role="none"><a href="#sponsors" onclick="closeMenu()" role="menuitem">Sponsors</a></li>
+                <li role="none"><a href="#ubicacion" onclick="closeMenu()" role="menuitem">Ubicación</a></li>
+                <li role="none"><a href="#faq" onclick="closeMenu()" role="menuitem">FAQ</a></li>
             </ul>
         </div>
     </nav>
@@ -101,7 +109,7 @@
                 <p class="section-subtitle">Elige el paquete que mejor se adapte a tu experiencia</p>
             </div>
             <div class="packages-grid">
-                <div class="package-card" style="border-top: 4px solid #4169e1;">
+                <article class="package-card" style="border-top: 4px solid #4169e1;" aria-label="Paquete General">
                     <div class="package-title" style="color: #4169e1;">PAQUETE GENERAL</div>
                     <div class="event-prize" style="color: #4169e1; margin: 20px 0;">$40.000</div>
                     <div style="text-align: center; color: #666; margin-bottom: 20px; font-size: 1.1em;">Por Persona</div>
@@ -110,9 +118,10 @@
                         <li>Si trae vehículo es incluido el estacionamiento</li>
                         <li>Puede reservar mesa para la tarima</li>
                     </ul>
-                </div>
+                </article>
 
-                <div class="package-card" style="border-top: 4px solid #FFD700; background: linear-gradient(135deg, #fffef7 0%, #fff9e6 100%);">
+                <article class="package-card" style="border-top: 4px solid #FFD700; background: linear-gradient(135deg, #fffef7 0%, #fff9e6 100%);" aria-label="Paquete Silver - Más Popular">
+                    <span class="package-badge popular" aria-label="Paquete más popular">⭐ Más Popular</span>
                     <div class="package-title" style="color: #d4af37;">PAQUETE SILVER</div>
                     <div class="event-prize" style="color: #d4af37; margin: 20px 0;">$70.000</div>
                     <div style="text-align: center; color: #666; margin-bottom: 20px; font-size: 1.1em;">Por Persona</div>
@@ -124,9 +133,10 @@
                         <li>Kayac atracciones</li>
                         <li>Cocktel de bienvenida</li>
                     </ul>
-                </div>
+                </article>
 
-                <div class="package-card" style="border-top: 4px solid #8B4513; background: linear-gradient(135deg, #fff8f0 0%, #ffefd5 100%);">
+                <article class="package-card" style="border-top: 4px solid #8B4513; background: linear-gradient(135deg, #fff8f0 0%, #ffefd5 100%);" aria-label="Paquete Premium - Mejor Valor">
+                    <span class="package-badge best-value" aria-label="Mejor valor">💎 Mejor Valor</span>
                     <div class="package-title" style="color: #8B4513;">PAQUETE PREMIUM</div>
                     <div class="event-prize" style="color: #8B4513; margin: 20px 0;">$90.000</div>
                     <div style="text-align: center; color: #666; margin-bottom: 20px; font-size: 1.1em;">Por Persona</div>
@@ -139,7 +149,7 @@
                         <li>Kayac atracciones</li>
                         <li>Cocktel de bienvenida</li>
                     </ul>
-                </div>
+                </article>
             </div>
 
             <div class="payment-info">
