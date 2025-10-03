@@ -134,7 +134,7 @@ body {
 
 .navbar-menu {
     display: flex;
-    gap: 45px;
+    gap: var(--space-lg);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -271,10 +271,15 @@ body {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    padding-top: 0;
+}
+
+.hero-content {
+    margin-top: calc(100px + 30px);
 }
 
 .hero::before {
@@ -1285,16 +1290,21 @@ section {
     }
 
     .navbar-menu {
-        gap: 30px;
+        gap: var(--space-md);
     }
 
     .navbar-menu a {
-        font-size: 1em;
-        padding: 8px 12px;
+        font-size: 0.95rem;
+        padding: var(--space-xs) var(--space-sm);
+    }
+
+    .hero {
+        padding-top: 0;
     }
 
     .hero-content {
         padding: 30px;
+        margin-top: calc(90px + 30px);
     }
 
     .invitation-text {
@@ -1395,14 +1405,14 @@ section {
 
     .hero {
         min-height: 100vh;
-        padding: 60px 0 80px 0;
-        justify-content: center;
+        padding: 0;
+        justify-content: flex-start;
         align-items: center;
     }
 
     .hero-content {
         padding: var(--space-md);
-        margin-top: -40px;
+        margin-top: calc(78px + 30px);
     }
 
     .logos-container {
@@ -1481,13 +1491,13 @@ section {
 @media (min-width: 481px) and (max-width: 768px) {
     .hero {
         min-height: 100vh;
-        padding: 80px 0 80px 0;
-        justify-content: center;
+        padding: 0;
+        justify-content: flex-start;
     }
 
     .hero-content {
         padding: var(--space-lg);
-        margin-top: -30px;
+        margin-top: calc(78px + 30px);
     }
 
     .logos-container {
