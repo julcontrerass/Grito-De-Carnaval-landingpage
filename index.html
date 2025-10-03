@@ -4,981 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grito de Carnaval 2026</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f0;
-            color: #2c2c2c;
-            overflow-x: hidden;
-            padding-top: 0;
-        }
-
-        /* Navbar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(135deg, #6b7c5a 0%, #556b47 100%);
-            backdrop-filter: blur(10px);
-            padding: 20px 30px;
-            z-index: 2000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-
-        .navbar-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-brand {
-            color: white;
-            font-size: 1.5em;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .navbar-menu {
-            display: flex;
-            gap: 45px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .navbar-menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            font-size: 1.05em;
-            padding: 8px 16px;
-            border-radius: 6px;
-            position: relative;
-        }
-
-        .navbar-menu a:hover {
-            background: rgba(255,255,255,0.15);
-            transform: translateY(-2px);
-        }
-
-        .navbar-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 80%;
-            height: 2px;
-            background: white;
-            transition: transform 0.3s ease;
-        }
-
-        .navbar-menu a:hover::after {
-            transform: translateX(-50%) scaleX(1);
-        }
-
-        .navbar-toggle {
-            display: none;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.3);
-            color: white;
-            font-size: 1.5em;
-            cursor: pointer;
-            padding: 8px 15px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-toggle:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        @media (max-width: 768px) {
-            .navbar-menu {
-                position: fixed;
-                top: 78px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 78px);
-                background: linear-gradient(135deg, #6b7c5a 0%, #556b47 100%);
-                flex-direction: column;
-                padding: 40px;
-                gap: 25px;
-                transition: left 0.3s ease;
-                align-items: center;
-            }
-
-            .navbar-menu a {
-                font-size: 1.3em;
-                padding: 12px 24px;
-            }
-
-            .navbar-menu.active {
-                left: 0;
-            }
-
-            .navbar-toggle {
-                display: block;
-            }
-
-            .navbar-brand {
-                font-size: 1.3em;
-            }
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #6b7c5a 0%, #556b47 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: movePattern 20s linear infinite;
-        }
-
-        @keyframes movePattern {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        .hero-content {
-            text-align: center;
-            color: white;
-            z-index: 1;
-            padding: 40px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logos-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            margin-top: 40px;
-            margin-bottom: -60px;
-            flex-wrap: wrap;
-        }
-
-        .logo-hero {
-            width: 180px;
-            height: 180px;
-            animation: float 3s ease-in-out infinite;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.3s ease;
-        }
-
-        .logo-hero:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-hero:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .logo-hero img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            object-fit: cover;
-        }
-
-        .logo-name {
-            margin-top: 15px;
-            font-size: 0.9em;
-            font-weight: 600;
-            letter-spacing: 1px;
-            opacity: 0.95;
-        }
-
-        .invitation-text {
-            font-size: 2.2em;
-            font-weight: 600;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .hero h1 {
-            font-size: 3.5em;
-            font-weight: 300;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-        }
-
-        .hero p {
-            font-size: 1.3em;
-            opacity: 0.9;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        .scroll-section {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .scroll-text {
-            color: rgba(255,255,255,0.9);
-            font-size: 1.1em;
-            margin-bottom: 10px;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .scroll-indicator {
-            animation: bounce 2s infinite;
-            display: flex;
-            justify-content: center;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
-        }
-
-        .scroll-indicator::after {
-            content: '↓';
-            font-size: 2em;
-            color: rgba(255,255,255,0.7);
-        }
-
-        /* Section Styles */
-        section {
-            padding: 100px 20px;
-            position: relative;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .section-title {
-            font-size: 2.8em;
-            font-weight: 300;
-            color: #6b7c5a;
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: #8a9a7a;
-        }
-
-        .section-subtitle {
-            font-size: 1.2em;
-            color: #666;
-            font-weight: 300;
-        }
-
-        /* Bienvenida Section */
-        .bienvenida {
-            background: white;
-        }
-
-        .welcome-content {
-            display: block;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .welcome-text {
-            width: 100%;
-        }
-
-        .welcome-text h3 {
-            font-size: 2em;
-            color: #6b7c5a;
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
-
-        .welcome-text p {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: #555;
-            margin-bottom: 15px;
-        }
-
-        .welcome-image {
-            background: linear-gradient(135deg, #6b7c5a 0%, #556b47 100%);
-            height: 400px;
-            border-radius: 8px;
-            box-shadow: 0 15px 35px rgba(107, 124, 90, 0.2);
-            animation: slideInRight 1s ease-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2em;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* Paquetes Section */
-        .paquetes {
-            background: #f9f9f6;
-        }
-
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .package-card {
-            background: white;
-            border-radius: 8px;
-            padding: 40px 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .package-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #6b7c5a, #8a9a7a);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .package-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(107, 124, 90, 0.2);
-        }
-
-        .package-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .package-title {
-            font-size: 1.6em;
-            color: #6b7c5a;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .package-items {
-            list-style: none;
-        }
-
-        .package-items li {
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
-            color: #555;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .package-items li::before {
-            content: '✓';
-            color: #6b7c5a;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .package-items li:last-child {
-            border-bottom: none;
-        }
-
-        .contact-info {
-            margin-top: 25px;
-            padding: 20px;
-            background: #f5f5f0;
-            border-radius: 6px;
-            border-left: 3px solid #6b7c5a;
-        }
-
-        .contact-name {
-            font-weight: 600;
-            color: #2c2c2c;
-            margin-bottom: 5px;
-        }
-
-        .contact-phone {
-            color: #6b7c5a;
-            font-size: 1.2em;
-            font-weight: 600;
-        }
-
-        /* Torneos Section */
-        .torneos {
-            background: white;
-        }
-
-        .tournaments-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-        }
-
-        .tournament-card {
-            background: linear-gradient(135deg, #6b7c5a 0%, #556b47 100%);
-            border-radius: 8px;
-            padding: 40px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(107, 124, 90, 0.3);
-            transition: transform 0.4s ease;
-        }
-
-        .tournament-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            transition: transform 0.6s ease;
-        }
-
-        .tournament-card:hover {
-            transform: scale(1.03);
-        }
-
-        .tournament-card:hover::before {
-            transform: translate(-20%, -20%);
-        }
-
-        .tournament-title {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-        }
-
-        .tournament-prize {
-            font-size: 2.5em;
-            font-weight: 300;
-            margin: 20px 0;
-            letter-spacing: 2px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .tournament-date {
-            font-size: 1.1em;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .tournament-contact {
-            background: rgba(255,255,255,0.15);
-            padding: 20px;
-            border-radius: 6px;
-            backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Stands Section */
-        .stands {
-            background: #f9f9f6;
-        }
-
-        .stands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .stand-card {
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .stand-card:hover {
-            box-shadow: 0 8px 25px rgba(107, 124, 90, 0.15);
-            transform: translateX(5px);
-        }
-
-        .stand-number {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #6b7c5a, #8a9a7a);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 1.2em;
-            flex-shrink: 0;
-        }
-
-        .stand-name {
-            color: #2c2c2c;
-            font-size: 1.1em;
-            font-weight: 500;
-        }
-
-        .stands-contact {
-            margin-top: 50px;
-            text-align: center;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .stands-contact h3 {
-            color: #6b7c5a;
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
-
-        .stands-contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .social-links {
-            color: #666;
-            font-size: 1em;
-        }
-
-        /* Sponsors Section */
-        .sponsors {
-            background: white;
-            padding: 100px 20px;
-        }
-
-        .sponsors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .sponsor-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px;
-            background: #f9f9f6;
-            border-radius: 8px;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .sponsor-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(107, 124, 90, 0.15);
-        }
-
-        .sponsor-logo {
-            width: 150px;
-            height: 150px;
-            background: #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 0.9em;
-            margin-bottom: 20px;
-            transition: transform 0.4s ease;
-            box-shadow: 0 5px 20px rgba(107, 124, 90, 0.2);
-            overflow: hidden;
-        }
-
-        .sponsor-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 10px;
-        }
-
-        .sponsor-card:hover .sponsor-logo {
-            transform: rotate(5deg) scale(1.05);
-        }
-
-        .sponsor-name {
-            font-size: 1.1em;
-            color: #2c2c2c;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        /* Resumen Final Section */
-        .resumen-final {
-            background: linear-gradient(135deg, #6b7c5a 0%, #556b47 100%);
-            padding: 100px 20px;
-            color: white;
-        }
-
-        .resumen-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .resumen-content h2 {
-            font-size: 2.5em;
-            font-weight: 300;
-            margin-bottom: 30px;
-        }
-
-        .resumen-content p {
-            font-size: 1.2em;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            opacity: 0.95;
-        }
-
-        .event-highlights {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-
-        .highlight-item {
-            background: rgba(255,255,255,0.1);
-            padding: 20px 30px;
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-            font-size: 1.1em;
-            font-weight: 600;
-        }
-
-        .mapa-container {
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .mapa-container h3 {
-            color: #6b7c5a;
-            font-size: 2em;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .mapa-address {
-            text-align: center;
-            color: #666;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-
-        .mapa-container iframe {
-            width: 100%;
-            height: 450px;
-            border: none;
-            border-radius: 8px;
-        }
-
-        /* WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: #25d366;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            text-decoration: none;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            }
-            50% {
-                box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7);
-            }
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
-        }
-
-        .whatsapp-float svg {
-            width: 32px;
-            height: 32px;
-            fill: white;
-        }
-
-        .event-prize {
-            font-size: 2.5em;
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5em;
-            }
-
-            .logos-container {
-                gap: 20px;
-            }
-
-            .logo-hero {
-                width: 140px;
-                height: 140px;
-            }
-
-            .invitation-text {
-                font-size: 1.5em;
-            }
-
-            .welcome-content {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 2em;
-            }
-
-            .tournaments-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stands-contact-info {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .logo-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #6b7c5a, #8a9a7a);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 1.2em;
-        }
-
-        /* FAQ Section */
-        .faq {
-            background: white;
-            padding: 100px 20px;
-        }
-
-        .faq-item {
-            background: #f9f9f6;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .faq-question {
-            padding: 25px 30px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s ease;
-            user-select: none;
-        }
-
-        .faq-question:hover {
-            background: #f0f0ed;
-        }
-
-        .faq-question-text {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #2c2c2c;
-        }
-
-        .faq-icon {
-            font-size: 1.5em;
-            color: #6b7c5a;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-icon {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            padding: 0 30px;
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 0 30px 25px 30px;
-        }
-
-        .faq-answer p {
-            color: #555;
-            line-height: 1.8;
-            font-size: 1.05em;
-        }
-
-        .payment-info {
-            background: #f9f9f6;
-            padding: 30px;
-            border-radius: 8px;
-            margin-top: 40px;
-            text-align: center;
-            border: 2px dashed #6b7c5a;
-        }
-
-        .payment-info h3 {
-            color: #6b7c5a;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-
-        .payment-info p {
-            font-size: 1.1em;
-            color: #555;
-            margin-bottom: 10px;
-        }
-
-        .payment-alias {
-            font-size: 1.4em;
-            font-weight: 700;
-            color: #6b7c5a;
-            background: white;
-            padding: 15px 30px;
-            border-radius: 6px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-content">
             <div class="navbar-brand">Grito de Carnaval 2026</div>
-            <button class="navbar-toggle" onclick="toggleMenu()">☰</button>
+            <button class="navbar-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+            </button>
             <ul class="navbar-menu" id="navbarMenu">
                 <li><a href="#inicio" onclick="closeMenu()">Inicio</a></li>
                 <li><a href="#evento" onclick="closeMenu()">El Evento</a></li>
@@ -1015,7 +51,7 @@
         </div>
         <div class="scroll-section">
             <div class="scroll-text">Descubre todo lo que tenemos preparado</div>
-            <div class="scroll-indicator"></div>
+            <div class="scroll-indicator" onclick="scrollToNextSection()"></div>
         </div>
     </div>
 
@@ -1030,23 +66,23 @@
                 <div class="welcome-text">
                     <h3 style="text-align: center;">Una Celebración Inolvidable</h3>
                     <p>El 4 de Enero de 2026 te invitamos a vivir el Grito de Carnaval en La Justina, ubicado en Rosario 1831, Derqui, Pilar. Una celebración llena de color, sabor y alegría donde la tradición venezolana se encuentra con el mejor ambiente de Buenos Aires.</p>
-                    
+
                     <h3 style="margin-top: 30px; color: #6b7c5a; font-size: 1.5em; text-align: center;">¿Qué te espera?</h3>
-                    
-                    <p><strong>🍴 Stands Gastronómicos:</strong> Disfruta de una increíble variedad de comida venezolana y argentina. Desde tequeños, arepas y cachapas, hasta pizzas, empanadas argentinas y mucho más. ¡Sabores que te harán viajar!</p>
-                    
+
+                    <p><strong>🍴 Stands Gastronómicos:</strong> Disfruta de una exquisita experiencia culinaria con propuestas gastronómicas de nivel internacional. Desde deliciosos tequeños, arepas y cachapas, hasta pizzas artesanales, empanadas y mucho más. ¡Un viaje de sabores que deleitará tu paladar!</p>
+
                     <p><strong>🎲 Torneos Competitivos:</strong> Participa o anima en nuestros emocionantes torneos de Dominó y Bolas Criollas con premios de hasta $1.000.000. La competencia será intensa y la diversión garantizada.</p>
-                    
+
                     <p><strong>🎵 Música en Vivo:</strong> Baila sin parar al ritmo de la mejor música latina. Desde salsa y merengue hasta reggaeton y música popular. ¡La pista de baile te espera!</p>
-                    
+
                     <p><strong>🎉 Ambiente Familiar:</strong> Un evento diseñado para toda la familia en un espacio seguro, acogedor y lleno de buena energía. Ven con tus seres queridos y crea recuerdos inolvidables.</p>
 
                     <div style="margin-top: 40px; text-align: center;">
                         <h3 style="color: #6b7c5a; font-size: 1.8em; margin-bottom: 20px;">¡Mira lo que fue el Carnaval 2025!</h3>
-                        <video 
+                        <video
                             id="carnavalVideo"
-                            width="100%" 
-                            style="max-width: 600px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.15);" 
+                            width="100%"
+                            style="max-width: 600px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.15);"
                             loop>
                             <source src="./Assets/carnaval-2025.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
@@ -1127,22 +163,14 @@
                     <div class="tournament-title">Super Torneo de Dominó</div>
                     <div class="tournament-prize">$ 1.000.000</div>
                     <div class="tournament-date">Domingo 4 de Enero 2026</div>
-                    <div class="tournament-contact">
-                        <div class="contact-name">Información y Reservas</div>
-                        <div class="contact-name">Ramón Pernía</div>
-                        <div class="contact-phone">1154585669</div>
-                    </div>
+                    <button class="more-info-btn" onclick="openModal('domino')">Click para más información y reservas</button>
                 </div>
 
                 <div class="tournament-card">
                     <div class="tournament-title">Torneo Mixto de Bolas Criollas</div>
                     <div class="tournament-prize">$ 500.000</div>
                     <div class="tournament-date">Domingo 4 de Enero 2026</div>
-                    <div class="tournament-contact">
-                        <div class="contact-name">Información y Reservas</div>
-                        <div class="contact-name">Javier Parra</div>
-                        <div class="contact-phone">1133660812</div>
-                    </div>
+                    <button class="more-info-btn" onclick="openModal('bolas')">Click para más información y reservas</button>
                 </div>
             </div>
         </div>
@@ -1153,7 +181,7 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Stands Gastronómicos</h2>
-                <p class="section-subtitle">Deliciosa variedad de comida venezolana y argentina para disfrutar</p>
+                <p class="section-subtitle">Explora nuestra variada propuesta gastronómica internacional con sabores auténticos de diferentes culturas</p>
             </div>
             <div class="stands-grid">
                 <div class="stand-card">
@@ -1187,6 +215,54 @@
                 <div class="stand-card">
                     <div class="stand-number">08</div>
                     <div class="stand-name">Pizza y Empanadas Argentinas</div>
+                </div>
+            </div>
+
+            <!-- Slider Infinito de Gastronomía -->
+            <div class="slider-container">
+                <div class="slider-track" id="sliderTrack">
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0013.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.02_0905ba57.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0014.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.02_fd28c651.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0016.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0015.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.01_080e4e7a.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.02_e60f91b9.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0017.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.01_53566606.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0018.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0021.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0020.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.00_48a3d095.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.22.59_c5883534.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0025.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0023.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0024.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0022.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.00_17f05464.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.22.59_aa457280.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.22.59_523f4bd8.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.22.59_09c1d0b0.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0029.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0027.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0026.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.01_acb61e65.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.01_5f97755e.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.02_c399734d.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/Imagen de WhatsApp 2025-10-03 a las 14.23.00_b1489765.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0034.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0032.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0031.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0030.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0036.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0035.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0033.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0038.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0037.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0039.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0040.jpg" alt="Gastronomía"></div>
+                    <div class="slider-slide"><img src="./Assets/Gastronomia/IMG-20251003-WA0041.jpg" alt="Gastronomía"></div>
                 </div>
             </div>
         </div>
@@ -1224,6 +300,12 @@
                     </div>
                     <div class="sponsor-name">Aeroenvíos Andinos</div>
                 </a>
+                <a href="https://www.instagram.com/cherie.arg/" target="_blank" class="sponsor-card">
+                    <div class="sponsor-logo">
+                        <img src="./Assets/cherie.png" alt="Cherie">
+                    </div>
+                    <div class="sponsor-name">Cherie</div>
+                </a>
             </div>
         </div>
     </section>
@@ -1235,7 +317,7 @@
                 <h2>¡No te pierdas el Grito de Carnaval 2026!</h2>
                 <p>Únete a nosotros el <strong>4 de Enero de 2026</strong> en La Justina para vivir una experiencia única llena de sabor, música, diversión y tradición venezolana en el corazón de Buenos Aires.</p>
                 <p>Disfruta de deliciosa comida de nuestros stands gastronómicos, compite en emocionantes torneos con grandes premios, baila con música en vivo y vive momentos inolvidables con tu familia y amigos.</p>
-                
+
                 <div class="event-highlights">
                     <div class="highlight-item">🎉 4 de Enero 2026</div>
                     <div class="highlight-item">🍴 Comida Variada</div>
@@ -1247,10 +329,10 @@
             <div class="mapa-container">
                 <h3>📍 Nuestra Ubicación</h3>
                 <div class="mapa-address">La Justina - Rosario 1831, Derqui, Pilar, Buenos Aires</div>
-                <iframe 
+                <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3287.8!2d-58.8!3d-34.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDI3JzAwLjAiUyA1OMKwNDgnMDAuMCJX!5e0!3m2!1ses!2sar!4v1234567890"
-                    allowfullscreen="" 
-                    loading="lazy" 
+                    allowfullscreen=""
+                    loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
@@ -1303,86 +385,122 @@
         </div>
     </section>
 
+    <!-- Modal Dominó -->
+    <div class="modal-overlay" id="modalDomino">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('domino')">&times;</button>
+                <div class="modal-title">Super Torneo de Dominó</div>
+                <div class="modal-prize">$ 1.000.000</div>
+                <div style="font-size: 1.1em; opacity: 0.95; margin-top: 10px;">Domingo 4 de Enero 2026</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>📋 Descripción del Torneo</h3>
+                    <p>Participa en el Super Torneo de Dominó más grande del año con un premio de $1.000.000. Una competencia emocionante donde podrás demostrar tu estrategia y habilidad en este clásico juego.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🏆 Premios</h3>
+                    <ul>
+                        <li>Primer Lugar: $1.000.000</li>
+                        <li>Premios adicionales por confirmar</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📅 Información del Evento</h3>
+                    <ul>
+                        <li><strong>Fecha:</strong> Domingo 4 de Enero 2026</li>
+                        <li><strong>Hora:</strong> A confirmar con el organizador</li>
+                        <li><strong>Lugar:</strong> La Justina, Rosario 1831, Derqui, Pilar</li>
+                        <li><strong>Formato:</strong> Por equipos</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📝 Requisitos de Inscripción</h3>
+                    <ul>
+                        <li>Inscripción previa obligatoria</li>
+                        <li>Cupos limitados</li>
+                        <li>Contactar al organizador para más detalles</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📞 Contacto para Información y Reservas</h3>
+                    <div class="contact-box">
+                        <div class="contact-name">Ramón Pernía</div>
+                        <div class="contact-phone">+54 11 5458-5669</div>
+                        <a href="https://wa.me/5491154585669?text=Hola!%20Me%20interesa%20participar%20en%20el%20Super%20Torneo%20de%20Dominó" target="_blank">💬 Contactar por WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Bolas Criollas -->
+    <div class="modal-overlay" id="modalBolas">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal('bolas')">&times;</button>
+                <div class="modal-title">Torneo Mixto de Bolas Criollas</div>
+                <div class="modal-prize">$ 500.000</div>
+                <div style="font-size: 1.1em; opacity: 0.95; margin-top: 10px;">Domingo 4 de Enero 2026</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>📋 Descripción del Torneo</h3>
+                    <p>Únete al Torneo Mixto de Bolas Criollas con un premio de $500.000. Un torneo inclusivo donde todos pueden participar y disfrutar de este deporte tradicional venezolano.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🏆 Premios</h3>
+                    <ul>
+                        <li>Primer Lugar: $500.000</li>
+                        <li>Premios adicionales por confirmar</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📅 Información del Evento</h3>
+                    <ul>
+                        <li><strong>Fecha:</strong> Domingo 4 de Enero 2026</li>
+                        <li><strong>Hora:</strong> A confirmar con el organizador</li>
+                        <li><strong>Lugar:</strong> La Justina, Rosario 1831, Derqui, Pilar</li>
+                        <li><strong>Formato:</strong> Torneo Mixto (hombres y mujeres)</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📝 Requisitos de Inscripción</h3>
+                    <ul>
+                        <li>Inscripción previa obligatoria</li>
+                        <li>Cupos limitados</li>
+                        <li>Pueden participar todos los niveles</li>
+                        <li>Contactar al organizador para más detalles</li>
+                    </ul>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📞 Contacto para Información y Reservas</h3>
+                    <div class="contact-box">
+                        <div class="contact-name">Javier Parra</div>
+                        <div class="contact-phone">+54 11 3366-0812</div>
+                        <a href="https://wa.me/5491133660812?text=Hola!%20Me%20interesa%20participar%20en%20el%20Torneo%20Mixto%20de%20Bolas%20Criollas" target="_blank">💬 Contactar por WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/541134276694?text=Hola!%20Me%20interesa%20obtener%20más%20información%20sobre%20el%20evento%20el%20grito%20de%20carnaval" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
+    <a href="https://wa.me/5491134276604?text=Hola!%20Me%20interesa%20obtener%20más%20información%20sobre%20el%20evento%20el%20grito%20de%20carnaval" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 7.933-2.127c2.42 1.37 5.173 2.127 8.067 2.127 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.467c-2.482 0-4.908-0.646-7.07-1.87l-0.507-0.292-5.253 1.408 1.417-5.236-0.321-0.521c-1.331-2.178-2.033-4.673-2.033-7.223 0-7.51 6.11-13.62 13.62-13.62s13.62 6.11 13.62 13.62-6.11 13.62-13.62 13.62zM21.653 18.507c-0.372-0.186-2.197-1.083-2.537-1.208-0.341-0.124-0.589-0.185-0.837 0.187-0.248 0.372-0.961 1.207-1.179 1.455s-0.434 0.279-0.806 0.093c-0.372-0.186-1.572-0.579-2.995-1.849-1.106-0.988-1.853-2.209-2.071-2.581s-0.023-0.573 0.163-0.758c0.167-0.166 0.372-0.434 0.558-0.651 0.186-0.217 0.248-0.372 0.372-0.62 0.124-0.248 0.062-0.465-0.031-0.651s-0.837-2.015-1.147-2.759c-0.303-0.724-0.611-0.626-0.837-0.638-0.217-0.011-0.465-0.013-0.713-0.013s-0.651 0.093-0.992 0.465c-0.341 0.372-1.301 1.271-1.301 3.103s1.332 3.599 1.518 3.847c0.186 0.248 2.625 4.006 6.359 5.617 0.888 0.383 1.581 0.612 2.122 0.783 0.892 0.283 1.704 0.243 2.347 0.147 0.716-0.107 2.197-0.898 2.507-1.766s0.31-1.611 0.217-1.766c-0.093-0.155-0.341-0.248-0.713-0.434z"/>
         </svg>
     </a>
 
-    <script>
-        // Video auto-play on scroll
-        const video = document.getElementById('carnavalVideo');
-        
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5 // El video debe estar al menos 50% visible
-        };
-
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Video entra en vista
-                    video.volume = 0.3; // Volumen suave (30%)
-                    video.play().catch(e => {
-                        // Si falla el autoplay con audio, intenta sin audio
-                        video.muted = true;
-                        video.play();
-                    });
-                } else {
-                    // Video sale de vista
-                    video.pause();
-                }
-            });
-        }, observerOptions);
-
-        if (video) {
-            videoObserver.observe(video);
-        }
-
-        // FAQ Toggle
-        function toggleFAQ(element) {
-            const faqItem = element.parentElement;
-            const wasActive = faqItem.classList.contains('active');
-            
-            // Close all FAQ items
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // Open clicked item if it wasn't active
-            if (!wasActive) {
-                faqItem.classList.add('active');
-            }
-        }
-
-        // Menu Toggle
-        function toggleMenu() {
-            const menu = document.getElementById('navbarMenu');
-            menu.classList.toggle('active');
-        }
-
-        function closeMenu() {
-            const menu = document.getElementById('navbarMenu');
-            menu.classList.remove('active');
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offset = 80;
-                    const targetPosition = target.offsetTop - offset;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
