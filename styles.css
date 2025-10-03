@@ -279,7 +279,7 @@ body {
 }
 
 .hero-content {
-    margin-top: calc(100px + 30px);
+    margin-top: calc(100px + 60px);
 }
 
 .hero::before {
@@ -1304,7 +1304,7 @@ section {
 
     .hero-content {
         padding: 30px;
-        margin-top: calc(90px + 30px);
+        margin-top: calc(90px + 60px);
     }
 
     .invitation-text {
@@ -1412,7 +1412,7 @@ section {
 
     .hero-content {
         padding: var(--space-md);
-        margin-top: calc(78px + 30px);
+        margin-top: calc(78px + 60px);
     }
 
     .logos-container {
@@ -1497,7 +1497,7 @@ section {
 
     .hero-content {
         padding: var(--space-lg);
-        margin-top: calc(78px + 30px);
+        margin-top: calc(78px + 60px);
     }
 
     .logos-container {
