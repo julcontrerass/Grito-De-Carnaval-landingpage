@@ -46,33 +46,101 @@ const observeSections = new IntersectionObserver((entries) => {
 sections.forEach(section => observeSections.observe(section));
 
 // ===========================
-// Video auto-play on scroll
+// Carousel Carnaval 2025 - Auto Change
 // ===========================
-const video = document.getElementById('carnavalVideo');
+let carouselInterval;
 
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.5
-};
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.getElementById('carnavalCarousel');
+    const nextBtn = document.getElementById('carouselNextBtn');
+    if (!carousel) return;
 
-const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            video.volume = 0.3;
-            video.play().catch(e => {
-                video.muted = true;
-                video.play();
-            });
+    const slides = carousel.querySelectorAll('.carousel-carnaval-slide');
+    if (slides.length === 0) return;
+
+    let currentIndex = 0;
+    let isVideoPaused = false;
+
+    function updateCarousel() {
+        // Remover clase active de todos
+        slides.forEach(slide => slide.classList.remove('active'));
+
+        // Agregar clase active al actual
+        slides[currentIndex].classList.add('active');
+
+        // Calcular desplazamiento para centrar el slide activo
+        const slideWidth = slides[0].offsetWidth;
+        const gap = 30;
+        const containerWidth = carousel.parentElement.offsetWidth;
+        const offset = (containerWidth / 2) - (slideWidth / 2) - (currentIndex * (slideWidth + gap));
+
+        carousel.style.transform = `translateX(${offset}px)`;
+
+        // Verificar si el slide actual tiene un video
+        const currentSlide = slides[currentIndex];
+        const hasVideo = currentSlide.querySelector('video') !== null;
+
+        // Manejar videos y botón
+        slides.forEach((slide, index) => {
+            const video = slide.querySelector('video');
+            if (video) {
+                if (index === currentIndex) {
+                    video.muted = true;
+                    video.play().catch(() => {});
+                } else {
+                    video.pause();
+                }
+            }
+        });
+
+        // Mostrar/ocultar botón y pausar/reanudar autoplay
+        if (hasVideo) {
+            // Pausar autoplay y mostrar botón
+            clearInterval(carouselInterval);
+            isVideoPaused = true;
+            if (nextBtn) {
+                nextBtn.style.display = 'block';
+            }
         } else {
-            video.pause();
+            // Ocultar botón y reanudar autoplay si estaba pausado
+            if (nextBtn) {
+                nextBtn.style.display = 'none';
+            }
+            if (isVideoPaused) {
+                startAutoplay();
+                isVideoPaused = false;
+            }
         }
-    });
-}, observerOptions);
+    }
 
-if (video) {
-    videoObserver.observe(video);
-}
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateCarousel();
+    }
+
+    function startAutoplay() {
+        clearInterval(carouselInterval);
+        carouselInterval = setInterval(nextSlide, 3000);
+    }
+
+    // Event listener para el botón siguiente
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextSlide);
+    }
+
+    // Iniciar - asegurarse que la primera tenga la clase active
+    setTimeout(() => {
+        updateCarousel();
+    }, 100);
+
+    // Auto avanzar cada 3 segundos
+    startAutoplay();
+
+    // Actualizar en resize
+    window.addEventListener('resize', debounce(() => {
+        updateCarousel();
+    }, 250));
+});
 
 // FAQ Toggle
 function toggleFAQ(element) {
