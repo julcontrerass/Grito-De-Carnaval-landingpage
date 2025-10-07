@@ -359,3 +359,110 @@ function debounce(func, wait) {
         timeout = setTimeout(later, wait);
     };
 }
+
+// ===========================
+// Copy Alias to Clipboard
+// ===========================
+function copyAlias(alias) {
+    // Copiar al portapapeles
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(alias).then(() => {
+            showCopyTooltip();
+        }).catch(() => {
+            // Fallback para navegadores antiguos
+            fallbackCopyText(alias);
+        });
+    } else {
+        fallbackCopyText(alias);
+    }
+}
+
+function fallbackCopyText(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+        document.execCommand('copy');
+        showCopyTooltip();
+    } catch (err) {
+        console.error('Error al copiar:', err);
+    }
+    document.body.removeChild(textArea);
+}
+
+function showCopyTooltip() {
+    // Mostrar tooltip en la sección de paquetes
+    const tooltip = document.getElementById('copyTooltip');
+    if (tooltip) {
+        tooltip.classList.add('show');
+        setTimeout(() => {
+            tooltip.classList.remove('show');
+        }, 2000);
+    }
+
+    // Mostrar tooltips en los modales (puede haber múltiples)
+    const modalTooltips = document.querySelectorAll('.copy-tooltip-modal');
+    modalTooltips.forEach(tooltip => {
+        tooltip.style.opacity = '1';
+        setTimeout(() => {
+            tooltip.style.opacity = '0';
+        }, 2000);
+    });
+}
+
+// ===========================
+// Carousel Artistas - Auto Change
+// ===========================
+let artistasCarouselInterval;
+
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.getElementById('artistasCarousel');
+    if (!carousel) return;
+
+    const slides = carousel.querySelectorAll('.carousel-artistas-slide');
+    if (slides.length === 0) return;
+
+    let currentIndex = 0;
+
+    function updateArtistasCarousel() {
+        // Remover clase active de todos
+        slides.forEach(slide => slide.classList.remove('active'));
+
+        // Agregar clase active al actual
+        slides[currentIndex].classList.add('active');
+
+        // Calcular desplazamiento para centrar el slide activo
+        const slideWidth = slides[0].offsetWidth;
+        const gap = 30;
+        const containerWidth = carousel.parentElement.offsetWidth;
+        const offset = (containerWidth / 2) - (slideWidth / 2) - (currentIndex * (slideWidth + gap));
+
+        carousel.style.transform = `translateX(${offset}px)`;
+    }
+
+    function nextArtistSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateArtistasCarousel();
+    }
+
+    function startArtistasAutoplay() {
+        clearInterval(artistasCarouselInterval);
+        artistasCarouselInterval = setInterval(nextArtistSlide, 3000);
+    }
+
+    // Iniciar - asegurarse que la primera tenga la clase active
+    setTimeout(() => {
+        updateArtistasCarousel();
+    }, 100);
+
+    // Auto avanzar cada 3 segundos
+    startArtistasAutoplay();
+
+    // Actualizar en resize
+    window.addEventListener('resize', debounce(() => {
+        updateArtistasCarousel();
+    }, 250));
+});

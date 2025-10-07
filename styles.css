@@ -122,6 +122,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-right: 40px;
 }
 
 .navbar-brand {
@@ -1186,6 +1187,91 @@ section {
     transform: translateX(-50%) translateY(-1px);
 }
 
+/* Artistas Section */
+.artistas {
+    background: #f9f9f6;
+}
+
+.artistas-content {
+    margin-top: 20px;
+}
+
+.carousel-artistas-container {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    padding: 100px 0;
+}
+
+.carousel-artistas-track {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: flex-start;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.carousel-artistas-slide {
+    flex-shrink: 0;
+    width: 350px;
+    height: 250px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: blur(4px) brightness(0.5);
+    transform: scale(0.75);
+    opacity: 0.6;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.carousel-artistas-slide.active {
+    filter: blur(0) brightness(1);
+    transform: scale(1.25);
+    box-shadow: 0 20px 50px rgba(107, 124, 90, 0.4);
+    z-index: 10;
+    opacity: 1;
+}
+
+.carousel-artistas-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: #f5f5f0;
+}
+
+.artist-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-primary);
+    color: white;
+    padding: 15px 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-artistas-slide.active .artist-name {
+    opacity: 1;
+}
+
+.carousel-artistas-slide:hover .artist-name {
+    opacity: 1;
+}
+
 /* Sponsors Section */
 .sponsors {
     background: white;
@@ -1243,6 +1329,10 @@ section {
 
 .sponsor-logo-dark {
     background: #000000 !important;
+}
+
+.sponsor-logo-brown {
+    background: #99642f !important;
 }
 
 .sponsor-card:hover .sponsor-logo {
@@ -1445,6 +1535,29 @@ section {
         transform: scale(1.2);
     }
 
+    /* Carousel artistas tablet */
+    .carousel-artistas-container {
+        padding: 60px 15px;
+    }
+
+    .carousel-artistas-track {
+        gap: 20px;
+    }
+
+    .carousel-artistas-slide {
+        width: 300px;
+        height: 200px;
+    }
+
+    .carousel-artistas-slide.active {
+        transform: scale(1.2);
+    }
+
+    .artist-name {
+        font-size: 1em;
+        padding: 12px 15px;
+    }
+
     .logo-name {
         font-size: 0.85em;
     }
@@ -1601,6 +1714,29 @@ section {
         transform: scale(1.15);
     }
 
+    /* Carousel artistas extra small screens */
+    .carousel-artistas-container {
+        padding: 40px 10px;
+    }
+
+    .carousel-artistas-track {
+        gap: 10px;
+    }
+
+    .carousel-artistas-slide {
+        width: 200px;
+        height: 140px;
+    }
+
+    .carousel-artistas-slide.active {
+        transform: scale(1.15);
+    }
+
+    .artist-name {
+        font-size: 0.9em;
+        padding: 12px 15px;
+    }
+
     .whatsapp-float {
         width: 50px;
         height: 50px;
@@ -1678,6 +1814,29 @@ section {
         width: 220px;
         height: 160px;
     }
+
+    /* Carousel artistas medium screens */
+    .carousel-artistas-container {
+        padding: 50px 10px;
+    }
+
+    .carousel-artistas-track {
+        gap: 15px;
+    }
+
+    .carousel-artistas-slide {
+        width: 220px;
+        height: 160px;
+    }
+
+    .carousel-artistas-slide.active {
+        transform: scale(1.18);
+    }
+
+    .artist-name {
+        font-size: 0.95em;
+        padding: 12px 15px;
+    }
 }
 
 /* ===========================
@@ -1739,6 +1898,29 @@ section {
 
     .carousel-carnaval-slide.active {
         transform: scale(1.18);
+    }
+
+    /* Carousel artistas responsive general */
+    .carousel-artistas-container {
+        padding: 50px 10px;
+    }
+
+    .carousel-artistas-track {
+        gap: 15px;
+    }
+
+    .carousel-artistas-slide {
+        width: 250px;
+        height: 180px;
+    }
+
+    .carousel-artistas-slide.active {
+        transform: scale(1.18);
+    }
+
+    .artist-name {
+        font-size: 0.95em;
+        padding: 12px;
     }
 
     /* Touch targets for mobile */
@@ -1933,6 +2115,12 @@ img[src] {
     margin-bottom: 10px;
 }
 
+.payment-alias-container {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+}
+
 .payment-alias {
     font-size: 1.4em;
     font-weight: 700;
@@ -1941,5 +2129,64 @@ img[src] {
     padding: 15px 30px;
     border-radius: 6px;
     display: inline-block;
-    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.payment-alias:hover {
+    background: #f5f5f0;
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(107, 124, 90, 0.2);
+}
+
+.payment-alias:active {
+    transform: scale(0.98);
+}
+
+.copy-tooltip {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #6b7c5a;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+.copy-tooltip.show {
+    opacity: 1;
+}
+
+.payment-alias-modal:hover {
+    background: #f5f5f0 !important;
+    transform: scale(1.02);
+}
+
+.payment-alias-modal:active {
+    transform: scale(0.98);
+}
+
+/* ===========================
+   Footer
+   =========================== */
+.footer {
+    background: var(--color-bg);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-content p {
+    color: #999;
+    font-size: 0.75rem;
+    margin: 0;
+    opacity: 0.6;
+    letter-spacing: 0.5px;
 }
