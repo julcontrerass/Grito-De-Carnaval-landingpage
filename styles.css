@@ -280,7 +280,7 @@ body {
 }
 
 .hero-content {
-    margin-top: calc(100px + 60px);
+    margin-top: calc(100px + 30px);
 }
 
 .hero::before {
@@ -302,7 +302,7 @@ body {
     text-align: center;
     color: white;
     z-index: 1;
-    padding: 40px 20px;
+    padding: 0px 20px;
     animation: fadeInUp 1s ease-out;
     width: 100%;
     max-width: 1200px;
