@@ -70,7 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Calcular desplazamiento para centrar el slide activo
         const slideWidth = slides[0].offsetWidth;
-        const gap = 30;
+        // Usar el gap real definido en CSS (cambia por breakpoint)
+        const cs = window.getComputedStyle(carousel);
+        let gap = parseInt(cs.gap || cs.columnGap || '0', 10);
+        if (Number.isNaN(gap)) gap = 30;
         const containerWidth = carousel.parentElement.offsetWidth;
         const offset = (containerWidth / 2) - (slideWidth / 2) - (currentIndex * (slideWidth + gap));
 
@@ -436,7 +439,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Calcular desplazamiento para centrar el slide activo
         const slideWidth = slides[0].offsetWidth;
-        const gap = 30;
+        // Usar el gap real definido en CSS (cambia por breakpoint)
+        const cs = window.getComputedStyle(carousel);
+        let gap = parseInt(cs.gap || cs.columnGap || '0', 10);
+        if (Number.isNaN(gap)) gap = 30;
         const containerWidth = carousel.parentElement.offsetWidth;
         const offset = (containerWidth / 2) - (slideWidth / 2) - (currentIndex * (slideWidth + gap));
 
