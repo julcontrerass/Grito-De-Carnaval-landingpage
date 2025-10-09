@@ -472,3 +472,70 @@ document.addEventListener('DOMContentLoaded', function() {
         updateArtistasCarousel();
     }, 250));
 });
+
+// ===========================
+// Background Music Control
+// ===========================
+document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('backgroundMusic');
+    const volumeBtn = document.getElementById('volumeControl');
+    const volumeIcon = document.getElementById('volumeIcon');
+    let musicStarted = false;
+
+    // SVG paths for volume icons
+    const volumeOnPath = 'M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z';
+    const volumeOffPath = 'M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z';
+
+    // Set initial volume to 0.3 (soft)
+    audio.volume = 0.3;
+
+    // Function to start music
+    function startMusic() {
+        if (!musicStarted) {
+            audio.play().then(() => {
+                musicStarted = true;
+                volumeBtn.classList.remove('muted');
+                volumeIcon.querySelector('path').setAttribute('d', volumeOnPath);
+            }).catch(error => {
+                console.log('Autoplay prevented, waiting for user interaction');
+            });
+        }
+    }
+
+    // Try to autoplay immediately
+    startMusic();
+
+    // Also try on first user interaction (click, scroll, touch)
+    const userInteractionEvents = ['click', 'scroll', 'touchstart', 'keydown'];
+    const startOnInteraction = function() {
+        if (!musicStarted) {
+            startMusic();
+            // Remove listeners after first interaction
+            userInteractionEvents.forEach(event => {
+                document.removeEventListener(event, startOnInteraction);
+            });
+        }
+    };
+
+    userInteractionEvents.forEach(event => {
+        document.addEventListener(event, startOnInteraction, { once: true, passive: true });
+    });
+
+    // Toggle mute/unmute
+    volumeBtn.addEventListener('click', function() {
+        if (audio.paused) {
+            audio.play();
+            musicStarted = true;
+            volumeBtn.classList.remove('muted');
+            volumeIcon.querySelector('path').setAttribute('d', volumeOnPath);
+        } else if (audio.muted) {
+            audio.muted = false;
+            volumeBtn.classList.remove('muted');
+            volumeIcon.querySelector('path').setAttribute('d', volumeOnPath);
+        } else {
+            audio.muted = true;
+            volumeBtn.classList.add('muted');
+            volumeIcon.querySelector('path').setAttribute('d', volumeOffPath);
+        }
+    });
+});
