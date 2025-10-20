@@ -702,12 +702,16 @@ section {
 }
 
 .tournaments-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    display: flex;
+    justify-content: center;
     gap: 40px;
+    flex-wrap: wrap;
 }
 
 .tournament-card {
+    flex: 0 0 auto;
+    max-width: 500px;
+    width: 100%;
     background: linear-gradient(135deg, #6b7c5a 0%, #556b47 100%);
     border-radius: 8px;
     padding: 40px;
@@ -743,9 +747,11 @@ section {
     min-height: 180px;
 }
 
+/* Super Torneo de Domino - Comentado para uso futuro
 .tournament-info.bg-domino {
     background-image: linear-gradient(135deg, rgba(107,124,90,0.55), rgba(85,107,71,0.85)), url('./Assets/Domino.jpg');
 }
+*/
 
 .tournament-info.bg-bolas {
     background-image: linear-gradient(135deg, rgba(107,124,90,0.55), rgba(85,107,71,0.85)), url('./Assets/Bolas criollas.jpg');
@@ -785,6 +791,7 @@ section {
     letter-spacing: 2px;
     position: relative;
     z-index: 1;
+    text-align: center;
 }
 
 .tournament-date {
@@ -793,6 +800,7 @@ section {
     margin-bottom: 20px;
     position: relative;
     z-index: 1;
+    text-align: center;
 }
 
 .tournament-contact {
@@ -1627,9 +1635,8 @@ section {
         margin: 0 auto;
     }
 
-    .tournaments-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
+    .tournament-card {
+        max-width: 450px;
     }
 
     .stands-grid {
@@ -1911,8 +1918,8 @@ section {
         font-size: clamp(1.8rem, 5vw, 2.2rem);
     }
 
-    .tournaments-grid {
-        grid-template-columns: 1fr;
+    .tournament-card {
+        max-width: 100%;
     }
 
     .stands-contact-info {
