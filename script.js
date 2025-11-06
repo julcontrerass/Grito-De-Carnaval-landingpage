@@ -489,8 +489,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set initial volume to 0.3 (soft)
     audio.volume = 0.3;
 
-    // Function to start music
-    function startMusic() {
+    // Function to start music (exposed globally for modal control)
+    window.startMusic = function() {
         if (!musicStarted) {
             audio.play().then(() => {
                 musicStarted = true;
@@ -500,26 +500,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Autoplay prevented, waiting for user interaction');
             });
         }
-    }
-
-    // Try to autoplay immediately
-    startMusic();
-
-    // Also try on first user interaction (click, scroll, touch)
-    const userInteractionEvents = ['click', 'scroll', 'touchstart', 'keydown'];
-    const startOnInteraction = function() {
-        if (!musicStarted) {
-            startMusic();
-            // Remove listeners after first interaction
-            userInteractionEvents.forEach(event => {
-                document.removeEventListener(event, startOnInteraction);
-            });
-        }
     };
 
-    userInteractionEvents.forEach(event => {
-        document.addEventListener(event, startOnInteraction, { once: true, passive: true });
-    });
+    // Music will now start when video modal closes
+    // No automatic music start on page load
 
     // Toggle mute/unmute
     volumeBtn.addEventListener('click', function() {
@@ -538,4 +522,172 @@ document.addEventListener('DOMContentLoaded', function() {
             volumeIcon.querySelector('path').setAttribute('d', volumeOffPath);
         }
     });
+});
+
+// ===========================
+// Video Modal Control
+// ===========================
+document.addEventListener('DOMContentLoaded', function() {
+    const videoModal = document.getElementById('modalVideo');
+    const closeBtn = document.getElementById('closeVideoModal');
+    const video = document.getElementById('presentationVideo');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const rewindBtn = document.getElementById('rewindBtn');
+    const forwardBtn = document.getElementById('forwardBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressFilled = document.getElementById('progressFilled');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    let modalClosed = false;
+
+    // Close modal function
+    function closeVideoModal() {
+        if (!modalClosed) {
+            modalClosed = true;
+            videoModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+
+            // Pause video when closing
+            if (video) {
+                video.pause();
+            }
+
+            // Start background music after closing modal
+            if (typeof window.startMusic === 'function') {
+                setTimeout(() => {
+                    window.startMusic();
+                }, 300); // Small delay for smooth transition
+            }
+        }
+    }
+
+    // Play/Pause toggle
+    function togglePlayPause() {
+        if (video.paused) {
+            video.play();
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+        } else {
+            video.pause();
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+        }
+    }
+
+    // Rewind 10 seconds
+    function rewind() {
+        video.currentTime = Math.max(0, video.currentTime - 10);
+    }
+
+    // Forward 10 seconds
+    function forward() {
+        video.currentTime = Math.min(video.duration, video.currentTime + 10);
+    }
+
+    // Update progress bar
+    function updateProgress() {
+        const percent = (video.currentTime / video.duration) * 100;
+        progressFilled.style.width = percent + '%';
+    }
+
+    // Seek video on progress bar click
+    function seek(e) {
+        const rect = progressBar.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        video.currentTime = pos * video.duration;
+    }
+
+    // Update play/pause icon based on video state
+    video.addEventListener('play', function() {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+    });
+
+    video.addEventListener('pause', function() {
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+    });
+
+    // Update progress bar as video plays
+    video.addEventListener('timeupdate', updateProgress);
+
+    // Event listeners for controls
+    if (playPauseBtn) {
+        playPauseBtn.addEventListener('click', togglePlayPause);
+    }
+
+    if (rewindBtn) {
+        rewindBtn.addEventListener('click', rewind);
+    }
+
+    if (forwardBtn) {
+        forwardBtn.addEventListener('click', forward);
+    }
+
+    if (progressBar) {
+        progressBar.addEventListener('click', seek);
+    }
+
+    // Allow space bar to toggle play/pause
+    document.addEventListener('keydown', function(event) {
+        if (event.key === ' ' && !modalClosed) {
+            event.preventDefault();
+            togglePlayPause();
+        }
+    });
+
+    // Close on button click
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeVideoModal);
+    }
+
+    // Close when clicking outside video
+    if (videoModal) {
+        videoModal.addEventListener('click', function(event) {
+            if (event.target === videoModal) {
+                closeVideoModal();
+            }
+        });
+    }
+
+    // Close on ESC key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && !modalClosed) {
+            closeVideoModal();
+        }
+    });
+
+    // Also close when video ends
+    if (video) {
+        video.addEventListener('ended', closeVideoModal);
+    }
+
+    // Show modal on page load
+    document.body.style.overflow = 'hidden';
+
+    // Function to open video modal
+    window.openVideoModal = function() {
+        modalClosed = false;
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Reset video to start and play
+        if (video) {
+            video.currentTime = 0;
+            video.play().then(() => {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            }).catch(error => {
+                console.log('Video play prevented');
+            });
+        }
+    };
+
+    // Event listener for "Ver Adelanto" button
+    const verAdelantoBtn = document.getElementById('verAdelantoBtn');
+    if (verAdelantoBtn) {
+        verAdelantoBtn.addEventListener('click', function() {
+            window.openVideoModal();
+        });
+    }
 });

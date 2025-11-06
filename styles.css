@@ -564,6 +564,35 @@ section {
     }
 }
 
+/* Ver Adelanto Button */
+.ver-adelanto-btn {
+    background: linear-gradient(135deg, #6b7c5a 0%, #556b47 100%);
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(107, 124, 90, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ver-adelanto-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(107, 124, 90, 0.4);
+    background: linear-gradient(135deg, #7a8c68 0%, #647957 100%);
+}
+
+.ver-adelanto-btn:active {
+    transform: translateY(-1px);
+}
+
 /* ===========================
    Paquetes Section
    =========================== */
@@ -1022,6 +1051,201 @@ section {
 
     .modal-body {
         padding: 20px;
+    }
+}
+
+/* Video Modal Styles */
+.modal-video-content {
+    background: transparent;
+    border-radius: 0;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    position: relative;
+    animation: slideUp 0.4s ease;
+    overflow: visible;
+}
+
+.modal-video-content .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+    background: rgba(0,0,0,0.8);
+    border: 2px solid rgba(255,255,255,0.9);
+    width: 50px;
+    height: 50px;
+    font-size: 2em;
+    transition: all 0.3s ease;
+}
+
+.modal-video-content .modal-close:hover {
+    background: rgba(255,255,255,0.9);
+    color: #000;
+    transform: rotate(90deg) scale(1.1);
+}
+
+.modal-video-content video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    border-radius: 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+}
+
+/* Custom Video Controls */
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 70%, transparent 100%);
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+}
+
+.modal-video-content:hover .video-controls {
+    opacity: 1;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 3px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar:hover {
+    height: 8px;
+}
+
+.progress-filled {
+    height: 100%;
+    background: #fff;
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.1s linear;
+    position: relative;
+}
+
+.progress-filled::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.progress-bar:hover .progress-filled::after {
+    opacity: 1;
+}
+
+.controls-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.control-btn {
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.8);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.control-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.control-btn.play-pause {
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.3);
+}
+
+.control-btn.play-pause svg {
+    width: 30px;
+    height: 30px;
+}
+
+.control-btn:hover {
+    background: rgba(255,255,255,0.9);
+    color: #000;
+    transform: scale(1.1);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+    .modal-video-content {
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+
+    .modal-video-content .modal-close {
+        top: 10px;
+        right: 10px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.8em;
+    }
+
+    .modal-video-content video {
+        max-height: 100vh;
+    }
+
+    .video-controls {
+        padding: 15px;
+        opacity: 1; /* Always visible on mobile */
+    }
+
+    .controls-buttons {
+        gap: 15px;
+    }
+
+    .control-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .control-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .control-btn.play-pause {
+        width: 55px;
+        height: 55px;
+    }
+
+    .control-btn.play-pause svg {
+        width: 26px;
+        height: 26px;
     }
 }
 
