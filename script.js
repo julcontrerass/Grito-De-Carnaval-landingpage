@@ -499,6 +499,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }).catch(error => {
                 console.log('Autoplay prevented, waiting for user interaction');
             });
+        } else if (audio.paused) {
+            // If music was already started but paused, resume it
+            audio.play();
+            volumeBtn.classList.remove('muted');
+            volumeIcon.querySelector('path').setAttribute('d', volumeOnPath);
+        }
+    };
+
+    // Function to pause music (exposed globally for modal control)
+    window.pauseMusic = function() {
+        if (!audio.paused) {
+            audio.pause();
         }
     };
 
@@ -538,6 +550,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const progressFilled = document.getElementById('progressFilled');
     const playIcon = document.getElementById('playIcon');
     const pauseIcon = document.getElementById('pauseIcon');
+    const soundIndicator = document.getElementById('soundIndicator');
+    const mutedIcon = document.getElementById('mutedIcon');
+    const unmutedIcon = document.getElementById('unmutedIcon');
     let modalClosed = false;
 
     // Close modal function
@@ -662,8 +677,37 @@ document.addEventListener('DOMContentLoaded', function() {
         video.addEventListener('ended', closeVideoModal);
     }
 
-    // Show modal on page load
+    // Show modal on page load and start video
     document.body.style.overflow = 'hidden';
+
+    // Update icons when video starts playing
+    if (video) {
+        video.addEventListener('playing', function onPlaying() {
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+            video.removeEventListener('playing', onPlaying);
+        }, { once: true });
+
+        // Click on video to unmute (browsers allow unmute on user interaction)
+        video.addEventListener('click', function() {
+            if (video.muted) {
+                video.muted = false;
+
+                // Change icon from muted to unmuted
+                if (mutedIcon && unmutedIcon) {
+                    mutedIcon.style.display = 'none';
+                    unmutedIcon.style.display = 'block';
+                }
+
+                // Hide indicator after 2 seconds
+                if (soundIndicator) {
+                    setTimeout(() => {
+                        soundIndicator.classList.add('hidden');
+                    }, 2000);
+                }
+            }
+        });
+    }
 
     // Function to open video modal
     window.openVideoModal = function() {
@@ -671,14 +715,30 @@ document.addEventListener('DOMContentLoaded', function() {
         videoModal.classList.add('active');
         document.body.style.overflow = 'hidden';
 
-        // Reset video to start and play
+        // Pause background music when video modal opens
+        if (typeof window.pauseMusic === 'function') {
+            window.pauseMusic();
+        }
+
+        // Reset video to start and play (muted)
         if (video) {
             video.currentTime = 0;
+            video.muted = true;
+
+            // Show sound indicator again and reset icons
+            if (soundIndicator) {
+                soundIndicator.classList.remove('hidden');
+            }
+
+            // Reset to muted icon
+            if (mutedIcon && unmutedIcon) {
+                mutedIcon.style.display = 'block';
+                unmutedIcon.style.display = 'none';
+            }
+
             video.play().then(() => {
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
-            }).catch(error => {
-                console.log('Video play prevented');
             });
         }
     };
