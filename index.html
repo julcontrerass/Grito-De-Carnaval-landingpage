@@ -148,18 +148,18 @@
                 </p>
                 <div class="carousel-artistas-container">
                     <div class="carousel-artistas-track" id="artistasCarousel">
-                        <a href="https://www.instagram.com/deamoryc/" target="_blank" class="carousel-artistas-slide" data-artist="De Amor y Cumbia">
+                        <!-- <a href="https://www.instagram.com/deamoryc/" target="_blank" class="carousel-artistas-slide" data-artist="De Amor y Cumbia">
                             <img src="./Assets/Bandas/De amor y cumbia (1).jpg" alt="De Amor y Cumbia">
                             <div class="artist-name">De Amor y Cumbia</div>
-                        </a>
+                        </a> -->
                         <a href="https://www.instagram.com/djcaniproducciones/" target="_blank" class="carousel-artistas-slide" data-artist="DJ Cani">
                             <img src="./Assets/Bandas/Dj Cani (1).jpg" alt="DJ Cani">
                             <div class="artist-name">DJ Cani</div>
                         </a>
-                        <a href="https://www.instagram.com/djvaneescobar/" target="_blank" class="carousel-artistas-slide" data-artist="DJ Vane Escobar">
+                        <!-- <a href="https://www.instagram.com/djvaneescobar/" target="_blank" class="carousel-artistas-slide" data-artist="DJ Vane Escobar">
                             <img src="./Assets/Bandas/DJ Vane Escobar2.jpg" alt="DJ Vane Escobar">
                             <div class="artist-name">DJ Vane Escobar</div>
-                        </a>
+                        </a> -->
                         <a href="https://www.instagram.com/elpollitodecabimas/" target="_blank" class="carousel-artistas-slide" data-artist="El Pollito de Cabimas">
                             <img src="./Assets/Bandas/El pollito de cabimas.jpg" alt="El Pollito de Cabimas">
                             <div class="artist-name">El Pollito de Cabimas</div>
@@ -183,6 +183,14 @@
                         <a href="https://www.instagram.com/gregorgrand/" target="_blank" class="carousel-artistas-slide" data-artist="Gregor Grand">
                             <img src="./Assets/Bandas/GregorGrand.jpeg" alt="Gregor Grand">
                             <div class="artist-name">DJ Gregor Grand</div>
+                        </a>
+                        <a href="https://www.instagram.com/rummyolivo/" target="_blank" class="carousel-artistas-slide" data-artist="Rummy Olivo">
+                            <img src="./Assets/Bandas/rummyolivo.jpg" alt="Gregor Grand">
+                            <div class="artist-name">Rummy Olivo</div>
+                        </a>
+                        <a href="https://www.instagram.com/cristinamaicaoficial/" target="_blank" class="carousel-artistas-slide" data-artist="Cristina Maica">
+                            <img src="./Assets/Bandas/cristinamaica.jpg" alt="Cristina Maica">
+                            <div class="artist-name">Cristina Maica</div>
                         </a>
                     </div>
                 </div>
@@ -277,10 +285,18 @@
     <!-- Paquetes Section -->
     <section class="paquetes" id="paquetes">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" style="margin-bottom: 0;">
                 <h2 class="section-title">Paquetes de Entradas</h2>
                 <p class="section-subtitle">Elige el paquete que mejor se adapte a tu experiencia</p>
             </div>
+
+            <!-- Aviso Niños Gratis -->
+            <div style="background: linear-gradient(135deg, #fff9e6 0%, #fffef7 100%); border: 1px solid #FFD700; border-radius: 6px; padding: 8px 15px; margin: 15px auto; max-width: 320px; text-align: center; box-shadow: 0 2px 6px rgba(255, 215, 0, 0.1);">
+                <span style="font-size: 1.1em; margin-right: 5px;">🎉</span>
+                <strong style="color: #d4af37; font-size: 1em;">¡Niños Entran Gratis!</strong>
+                <span style="color: #555; font-size: 0.85em; margin-left: 5px;">Menores de 10 años</span>
+            </div>
+
             <div class="packages-grid">
                 <article class="package-card" style="border-top: 4px solid #4169e1;" aria-label="Paquete General">
                     <div class="package-title" style="color: #4169e1;">PAQUETE GENERAL</div>
@@ -363,7 +379,7 @@
                     <div class="tournament-title">Torneo Mixto de Bolas Criollas</div>
                     <div class="tournament-info bg-bolas">
                     <div class="tournament-date">Premio a repartir</div>
-                    <div class="tournament-prize">$ 1.000.000</div>
+                    <div class="tournament-prize">$ 500.000</div>
                     <div class="tournament-date">Domingo 4 de Enero 2026</div>
                     <button class="more-info-btn" onclick="openModal('bolas')">Click para mas informacion y reservas</button>
                     </div>
@@ -476,6 +492,12 @@
                     </div>
                     <div class="sponsor-name">La Justina</div>
                 </a>
+                <a href="https://www.instagram.com/extranjero.ar?igsh=MXU3bGwxejh4eW85aA==" target="_blank" class="sponsor-card">
+                    <div class="sponsor-logo">
+                        <img src="./Assets/Sponsors/extranjero.jpg" alt="Extranjero">
+                    </div>
+                    <div class="sponsor-name">Extranjero</div>
+                </a>
             </div>
         </div>
     </section>
@@ -553,6 +575,16 @@
                     Si adquiriste el paquete Silver o Premium con transporte, te contactaremos para coordinar el punto de encuentro.</p>
                 </div>
             </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span class="faq-question-text">¿Los niños pagan entrada?</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>¡Buenas noticias! Los <strong>niños menores de 10 años entran completamente gratis</strong> al evento. Solo deben estar acompañados por un adulto con entrada válida. Esta es una excelente oportunidad para disfrutar en familia sin costo adicional para los más pequeños.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -618,19 +650,19 @@
                 <button class="modal-close" onclick="closeModal('bolas')">&times;</button>
                 <div class="modal-title">Torneo Mixto de Bolas Criollas</div>
                 <div style="font-size: 1.1em; opacity: 0.95; margin-top: 10px;">Premios a repartir de:</div>
-                <div class="modal-prize">$ 1.000.000</div>
+                <div class="modal-prize">$ 500.000</div>
                 <div style="font-size: 1.1em; opacity: 0.95; margin-top: 10px;">Domingo 4 de Enero 2026</div>
             </div>
             <div class="modal-body">
                 <div class="modal-section">
                     <h3>📋 Descripción del Torneo</h3>
-                    <p>Únete al Torneo Mixto de Bolas Criollas con un premio de $1.000.000. Un torneo inclusivo donde todos pueden participar y disfrutar de este deporte tradicional.</p>
+                    <p>Únete al Torneo Mixto de Bolas Criollas con un premio de $500.000. Un torneo inclusivo donde todos pueden participar y disfrutar de este deporte tradicional.</p>
                 </div>
 
                 <div class="modal-section">
                     <h3>🏆 Premios</h3>
                     <ul>
-                        <li>Premio a repartir: $1.000.000</li>
+                        <li>Premio a repartir: $500.000</li>
                         <li>Premios adicionales por confirmar</li>
                     </ul>
                 </div>
