@@ -776,11 +776,9 @@ section {
     min-height: 180px;
 }
 
-/* Super Torneo de Domino - Comentado para uso futuro
 .tournament-info.bg-domino {
     background-image: linear-gradient(135deg, rgba(107,124,90,0.55), rgba(85,107,71,0.85)), url('./Assets/Domino.jpg');
 }
-*/
 
 .tournament-info.bg-bolas {
     background-image: linear-gradient(135deg, rgba(107,124,90,0.55), rgba(85,107,71,0.85)), url('./Assets/Bolas criollas.jpg');
