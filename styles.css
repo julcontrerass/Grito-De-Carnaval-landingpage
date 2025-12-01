@@ -293,7 +293,8 @@ body {
 }
 
 .hero-content {
-    margin-top: 100px;
+    margin-top: 140px;
+    margin-bottom: 80px;
 }
 
 .hero::before {
@@ -478,7 +479,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: var(--z-base);
+    z-index: 2;
     box-shadow: 0 -4px 20px rgba(255, 165, 0, 0.3);
     animation: fadeInUp 0.8s ease-out;
 }
@@ -653,7 +654,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: var(--z-base);
+    z-index: 2;
     box-shadow: 0 -4px 20px rgba(107, 124, 90, 0.3);
     text-align: center;
     color: white;
@@ -2081,7 +2082,8 @@ section {
 
     .hero-content {
         padding: 30px;
-        margin-top: 90px;
+        margin-top: 100px;
+        margin-bottom: 70px;
     }
 
     .invitation-text {
@@ -2229,7 +2231,8 @@ section {
 
     .hero-content {
         padding: var(--space-md);
-        margin-top: 0px;
+        margin-top: 60px;
+        margin-bottom: 60px;
     }
 
     .logos-container {
@@ -2355,7 +2358,8 @@ section {
 
     .hero-content {
         padding: var(--space-lg);
-        margin-top: 84px;
+        margin-top: 80px;
+        margin-bottom: 65px;
     }
 
     .logos-container {
