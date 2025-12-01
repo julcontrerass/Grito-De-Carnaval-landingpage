@@ -751,3 +751,75 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// ===========================
+// Presale Prices Management
+// ===========================
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to format price with thousands separator
+    function formatPrice(price) {
+        return '$' + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+    // Function to check if we're still in presale period
+    function isPresalePeriod() {
+        const now = new Date();
+        // Presale ends on December 10, 2025 at 23:59:59
+        const presaleEnd = new Date('2025-12-10T23:59:59');
+
+        return now <= presaleEnd;
+    }
+
+    // Function to update prices and banners based on current date
+    function updatePricesAndBanners() {
+        const priceContainers = document.querySelectorAll('.price-container');
+        const presaleBanner = document.getElementById('presaleBanner');
+        const scrollBanner = document.getElementById('scrollBanner');
+        const inPresale = isPresalePeriod();
+
+        priceContainers.forEach(container => {
+            const presalePrice = parseInt(container.dataset.presalePrice);
+            const regularPrice = parseInt(container.dataset.regularPrice);
+            const oldPriceElement = container.querySelector('.old-price');
+            const newPriceElement = container.querySelector('.new-price');
+
+            if (inPresale) {
+                // Show presale pricing (old price crossed out, new price big)
+                if (oldPriceElement) {
+                    oldPriceElement.style.display = 'block';
+                    oldPriceElement.textContent = formatPrice(regularPrice);
+                }
+                if (newPriceElement) {
+                    newPriceElement.textContent = formatPrice(presalePrice);
+                }
+            } else {
+                // Show regular pricing (hide old price, show only regular price)
+                if (oldPriceElement) {
+                    oldPriceElement.style.display = 'none';
+                }
+                if (newPriceElement) {
+                    newPriceElement.textContent = formatPrice(regularPrice);
+                    // Reset font size to normal when not in presale
+                    newPriceElement.style.fontSize = '2.5em';
+                }
+            }
+        });
+
+        // Show/hide banners based on period
+        if (presaleBanner && scrollBanner) {
+            if (inPresale) {
+                presaleBanner.style.display = 'block';
+                scrollBanner.style.display = 'none';
+            } else {
+                presaleBanner.style.display = 'none';
+                scrollBanner.style.display = 'block';
+            }
+        }
+    }
+
+    // Update prices immediately on page load
+    updatePricesAndBanners();
+
+    // Check and update prices every hour in case user keeps page open
+    setInterval(updatePricesAndBanners, 3600000); // 3600000ms = 1 hour
+});
