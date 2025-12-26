@@ -114,11 +114,13 @@ body {
 .navbar.scrolled {
     padding: var(--space-md) var(--space-xl);
     box-shadow: var(--shadow-lg);
-    background: linear-gradient(135deg, rgba(107,124,90,0.85) 0%, rgba(85,107,71,0.85) 100%);
+    background: linear-gradient(135deg, rgba(107,124,90,0.95) 0%, rgba(85,107,71,0.95) 100%);
 }
 
 .navbar-content {
     width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -128,19 +130,29 @@ body {
 .navbar-brand {
     color: white;
     text-decoration: none;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    font-size: 1.5em;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    white-space: nowrap;
-    margin-right: var(--space-2xl);
+    justify-content: center;
+    transition: all var(--transition-base);
 }
 
 .navbar-brand:hover,
 .navbar-brand:focus {
-    opacity: 0.95;
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.navbar-title {
+    font-size: 1.5em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    white-space: nowrap;
+    text-align: center;
+}
+
+.navbar.scrolled .navbar-title {
+    font-size: 1.3em;
 }
 
 .navbar-menu {
@@ -191,6 +203,23 @@ body {
     transform: translateX(-50%) scaleX(1);
 }
 
+/* Desktop Layout - Centered Brand Above Menu */
+@media (min-width: 769px) {
+    .navbar-content {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .navbar-brand {
+        margin-right: 0;
+    }
+
+    .navbar-menu {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
 .navbar-toggle {
     display: none;
     flex-direction: column;
@@ -238,6 +267,27 @@ body {
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        padding: var(--space-md) var(--space-lg);
+    }
+
+    .navbar-content {
+        flex-direction: row;
+    }
+
+    .navbar-brand {
+        margin-right: 0;
+    }
+
+    .navbar-title {
+        font-size: 1em;
+        letter-spacing: 1px;
+    }
+
+    .navbar.scrolled .navbar-title {
+        font-size: 0.9em;
+    }
+
     .navbar-menu {
         position: fixed;
         top: 78px;
@@ -271,11 +321,6 @@ body {
         align-items: center;
         margin-left: auto;
     }
-
-    .navbar-brand {
-        font-size: 1.1em;
-        margin-right: 0;
-    }
 }
 
 /* ===========================
@@ -293,7 +338,7 @@ body {
 }
 
 .hero-content {
-    margin-top: 140px;
+    margin-top: 180px;
     margin-bottom: 80px;
 }
 
@@ -1784,8 +1829,16 @@ section {
 
 /* Responsive Tablets */
 @media (min-width: 769px) and (max-width: 1024px) {
-    .navbar-content {
-        padding: 0 30px;
+    .navbar {
+        padding: var(--space-md) var(--space-lg);
+    }
+
+    .navbar-title {
+        font-size: 1.4em;
+    }
+
+    .navbar.scrolled .navbar-title {
+        font-size: 1.2em;
     }
 
     .navbar-menu {
@@ -1803,7 +1856,7 @@ section {
 
     .hero-content {
         padding: 30px;
-        margin-top: 100px;
+        margin-top: 140px;
         margin-bottom: 70px;
     }
 
